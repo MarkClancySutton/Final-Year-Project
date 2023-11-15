@@ -1,55 +1,55 @@
 import React, { useState } from "react";
-import Footer from '../components/Footer';
-import Header from '../components/pHeader';
-
-import { Link } from "react-router-dom";
-
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Header from "../components/pHeader";
+import Sidenav from "../components/sidebar";
+import Footer from "../components/Footer";
 
 
-
-function Login() {
+const AddUser = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [gender, setGender] = useState("Male");
   const [pass,setPassword]= useState("");
   const navigate = useNavigate();
-  
-  //Create the variable to authenticate and see if it already exists and if not set it to false
-  const [authenticated, setauthenticated] = useState(localStorage.getItem(localStorage.getItem("authenticated")|| false));
-  const users = [{ email: "admin@gmail.com", pass: "admin12" }];
  
-  const loginUser = async (e) => {
+  const saveUser = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/login", {
+      await axios.post("http://localhost:5000/users", {
+        name,
         email,
+        gender,
         pass,
       });
-      const account = users.find((user) => user.email === email);
-      if (account && account.pass === pass) {
-      setauthenticated(true)
-      localStorage.setItem("authenticated", true);
-      navigate("/UserList");
-      }else{
-        navigate("/home");
-      }
-      
-     
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
   };
-
-
-      return (
-        <>
-        <Header/>
-        
-        <div className="columns mt-5">
+ 
+  return (
+    <>
+    <Header/>
+    
+    
+    <div className="columns mt-5">
       <div className="column is-half">
       <div className="Home">
       <div className="form">
-        <form onSubmit={loginUser}>
+        <form onSubmit={saveUser}>
+          <div className="field">
+            <label className="label">Name</label>
+            <div className="control">
+              <input
+                type="text"
+                className="input"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Name"
+              />
+            </div>
+          </div>
           <div className="field">
             <label className="label">Email</label>
             <div className="control">
@@ -74,18 +74,29 @@ function Login() {
               />
             </div>
           </div>
+          <div className="field">
+            <label className="label">Gender</label>
+            <div className="control">
+              <div className="select is-fullwidth">
+                <select
+                  value={gender}
+                  onChange={(e) => setGender(e.target.value)}
+                >
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+            </div>
+          </div>
           <br/>
           <div className="field">
             <div className="control">
               <button type="submit" className="newbtn">
-                Login
+                Register
               </button>
             </div>
           </div>
         </form>
-        <Link to="/Register" className="newbtn">
-          Register
-        </Link>
        </div>
       </div>
     </div>
@@ -94,5 +105,5 @@ function Login() {
     </>
   );
 };
-
-export default Login;
+ 
+export default AddUser;

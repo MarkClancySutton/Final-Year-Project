@@ -7,14 +7,11 @@ function Header() {
   return (
    
       <Navbar className='header' fixed="top">
-        <Navbar.Brand href="/Home"><h1>Smart Home app  </h1></Navbar.Brand> {/*Home link in the logo */}
+        <Navbar.Brand href="/"><h1>Smart Home app  </h1></Navbar.Brand> {/*Home link in the logo */}
         <Navbar.Brand> </Navbar.Brand>
           <Navbar.Brand> </Navbar.Brand>
         
-          <Nav className="headlink" fixed="top">
-          <Nav.Link href="/"> Logout</Nav.Link>
-           
-          </Nav>
+          
       </Navbar>
   );
 }

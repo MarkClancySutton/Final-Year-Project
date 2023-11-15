@@ -7,7 +7,7 @@ import Backbutton from "../components/button";
 import Back from "../components/Backdrop";
 import Header from '../components/header';
 import Footer from '../components/Footer';
-import Sidenav  from "../components/sidebar";
+
 
 
 const Home = () => {
@@ -27,7 +27,7 @@ const Home = () => {
 
       <Header/>
       
-      <Sidenav/>
+      
       
       <div className="Home">
       

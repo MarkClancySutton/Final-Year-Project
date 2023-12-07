@@ -37,7 +37,7 @@ export const loginUser = async (req,res) =>{
     if(!booleanPassword){
         return res.status(404).json({message: "The password is incorrect "});
     }
-    return res.status(200).json({message: "YOu have logged in successfully "});
+    return res.status(200).json({message: "You have logged in successfully "});
 
 }
 // get the users info based on the id parameter
@@ -57,7 +57,7 @@ export const saveUser = async (req, res) => {
         const inserteduser = await user.save();
         res.status(201).json(inserteduser);
     } catch (error) {// if function failed
-        res.status(400).json({message: "error inputing values into the database "});
+        res.status(400).json({message: "Adding this new user. The email might already be registered with us  "});
     }
 }
 

@@ -12,6 +12,7 @@ const AddUser = () => {
   const [gender, setGender] = useState("Male");
   const [pass,setPassword]= useState("");
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
  
   const saveUser = async (e) => {
     e.preventDefault();
@@ -24,7 +25,7 @@ const AddUser = () => {
       });
       navigate("/");
     } catch (error) {
-      console.log(error);
+      setError(error.response.data.message); // Access the error response data
     }
   };
  
@@ -94,6 +95,7 @@ const AddUser = () => {
               <button type="submit" className="newbtn">
                 Register
               </button>
+              {error && <p>Error: {error}</p>}
             </div>
           </div>
         </form>

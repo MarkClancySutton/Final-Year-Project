@@ -13,6 +13,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [pass,setPassword]= useState("");
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
   
   //Create the variable to authenticate and see if it already exists and if not set it to false
   const [authenticated, setauthenticated] = useState(localStorage.getItem(localStorage.getItem("authenticated")|| false));
@@ -20,6 +21,7 @@ function Login() {
  
   const loginUser = async (e) => {
     e.preventDefault();
+    
     try {
       await axios.post("http://localhost:5000/login", {
         email,
@@ -36,7 +38,7 @@ function Login() {
       
      
     } catch (error) {
-      console.log(error);
+      setError(error.response.data.message); // Access the error response data
     }
   };
 
@@ -86,7 +88,9 @@ function Login() {
         <Link to="/Register" className="newbtn">
           Register
         </Link>
+        {error && <p>Error: {error}</p>}
        </div>
+       
       </div>
     </div>
     <Footer/>

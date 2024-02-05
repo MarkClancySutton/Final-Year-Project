@@ -2,6 +2,7 @@
 #include <WiFi.h>
 #include <ESPmDNS.h>
 #include <WiFiClient.h>
+#include <Wire.h>
 
 String item = "0";
 const char* ssid = "Ting";
@@ -15,6 +16,10 @@ LiquidCrystal_I2C mylcd(0x27, 16, 2);
 #define fanPin2 18
 #define led_y 12  // Define the yellow led pin to 12
 
+#include <ESP32_Servo.h>
+Servo myservo;
+int servoPin = 13;
+
 void setup() {
   Serial.begin(115200);
   mylcd.init();
@@ -22,6 +27,7 @@ void setup() {
   pinMode(led_y, OUTPUT);
   pinMode(fanPin1, OUTPUT);
   pinMode(fanPin2, OUTPUT);
+  myservo.attach(servoPin);
 
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
@@ -94,6 +100,18 @@ void loop() {
     digitalWrite(fanPin1, LOW); // pwm = 0
     analogWrite(fanPin2, 0);
   }
+  if (req == "/door/open") // Browser accesses address ip address/fan/off
+  {
+    client.println("open the door");
+    myservo.write(180); 
+  }
+
+  if (req == "/door/closed") // Browser accesses address ip address/fan/off
+  {
+    client.println("close the door");
+    myservo.write(0); 
+  }
+
   // client.print(s);
   client.stop();
 }

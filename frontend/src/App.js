@@ -7,6 +7,7 @@ import UserList from "./pages/UserList";
 import AddUser from "./pages/AddUser";
 import Register from './pages/Register';
 import EditUser from './pages/EditUser';
+import Routine from './pages/Routine';
 
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="UserList" element={<UserList />} />
           <Route path="UserList/add" element={<AddUser />} />
           <Route path="UserList/edit/:id" element={<EditUser />} />
+          <Route path="Routine" element={<Routine />} />
         </Route>
       </Routes>
       

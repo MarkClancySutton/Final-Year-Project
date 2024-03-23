@@ -16,7 +16,7 @@ const Home = () => {
   }
 
   function light_on() {
-    fetch("http://192.168.104.135:80/led/on", {
+    fetch("http://192.168.189.135:80/led/on", {
       method: "GET", // You can change the method as needed (GET, POST, etc.)
       headers: {
         // You can add headers if necessary
@@ -33,7 +33,7 @@ const Home = () => {
   }
 
   function light_off() {
-    fetch("http://192.168.104.135:80/led/off", {
+    fetch("http://192.168.189.135:80/led/off", {
       method: "GET", // You can change the method as needed (GET, POST, etc.)
       headers: {
         // You can add headers if necessary
@@ -49,7 +49,7 @@ const Home = () => {
       });
   }
   function fan_on() {
-    fetch("http://192.168.104.135:80/fan/on", {
+    fetch("http://192.168.189.135:80/fan/on", {
       method: "GET", // You can change the method as needed (GET, POST, etc.)
       headers: {
         // You can add headers if necessary
@@ -65,7 +65,7 @@ const Home = () => {
       });
   }
   function fan_off() {
-    fetch("http://192.168.104.135:80/fan/off", {
+    fetch("http://192.168.189.135:80/fan/off", {
       method: "GET", // You can change the method as needed (GET, POST, etc.)
       headers: {
         // You can add headers if necessary
@@ -81,7 +81,7 @@ const Home = () => {
       });
   }
   function door_open() {
-    fetch("http://192.168.104.135:80/door/open", {
+    fetch("http://192.168.189.135:80/door/on", {
       method: "GET", // You can change the method as needed (GET, POST, etc.)
       headers: {
         // You can add headers if necessary
@@ -97,7 +97,7 @@ const Home = () => {
       });
   }
   function door_closed() {
-    fetch("http://192.168.104.135:80/door/closed", {
+    fetch("http://192.168.189.135:80/door/off", {
       method: "GET", // You can change the method as needed (GET, POST, etc.)
       headers: {
         // You can add headers if necessary
@@ -123,15 +123,40 @@ const Home = () => {
         {open && <Back onClick={goBack} />}
 
         {/* Button to send HTTP request */}
-        <a onClick={light_on}><img src="light-on.png" width="100" height="150" /></a>
+        <div>
+          <h2>Connected Devices</h2>    
+          
+          
+          <img src="light.png" width="150" height="200" />
+          
+          <img src="fan.png" width="150" height="200" />
+          
+          <img src="door.png" width="150" height="200" />
+          
+          <br/>
+          <a onClick={light_on}><img src="light-on.png" width="75" height="100" /></a>
+          <a onClick={light_off}><img src="light-off.png" width="75" height="100" /></a>
+        
+
+       
+          
+          
+          <a onClick={fan_on}><img src="fan-on.png" width="75" height="100" /></a>
+          <a onClick={fan_off}><img src="fan-off.png" width="75" height="100" /></a>
+        
+
+        
+          
+          
+          <a onClick={door_open}><img src="door-open.png" width="75" height="100" /></a>
+          <a onClick={door_closed}><img src="door-closed.png" width="75" height="100" /></a>
+        
+
+        </div>
+        
+        
+        <br />
       
-        <a onClick={light_off}><img src="light-off.png" width="100" height="150" /></a>
-        <br />
-        <a onClick={fan_on}><img src="fan-on.png" width="100" height="150" /></a>
-        <a onClick={fan_off}><img src="fan-off.png" width="100" height="150" /></a>
-        <br />
-        <a onClick={door_open}><img src="door-open.png" width="100" height="150" /></a>
-        <a onClick={door_closed}><img src="door-closed.png" width="100" height="150" /></a>
         
       </div>
 

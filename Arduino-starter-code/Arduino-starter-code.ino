@@ -100,13 +100,13 @@ void loop() {
     digitalWrite(fanPin1, LOW); // pwm = 0
     analogWrite(fanPin2, 0);
   }
-  if (req == "/door/open") // Browser accesses address ip address/fan/off
+  if (req == "/door/on") // Browser accesses address ip address/fan/off
   {
     client.println("open the door");
     myservo.write(180); 
   }
 
-  if (req == "/door/closed") // Browser accesses address ip address/fan/off
+  if (req == "/door/off") // Browser accesses address ip address/fan/off
   {
     client.println("close the door");
     myservo.write(0); 

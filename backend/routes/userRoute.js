@@ -7,7 +7,7 @@ import { //import all the functions from the user controller
     deleteUser,
     loginUser,
     
-} from "../controllers/UserController.js";
+} from "../controllers/userController.js";
 
 //set up the router to be able to configure the routes for the functions
 const router = express.Router();

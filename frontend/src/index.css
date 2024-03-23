@@ -12,13 +12,18 @@ body {
   margin: 0; 
 }
 
+/* Add a universal selector to target all elements */
+*, *::before, *::after {
+  background-color: rgb(206, 206, 206) !important; /* !important ensures this rule takes precedence */
+}
+
 .header {
   z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #ffffff;
-  color: rgb(7, 7, 7);
+  background-color: rgb(165, 164, 164);
+  color: rgb(0, 0, 0);
   font-size: 30px;
   padding: 10px; /* Adjust the padding */
   margin: 0; /* Add this line to remove margin */
@@ -74,9 +79,10 @@ body {
   padding: 5px 15px;
   cursor: pointer;
   border-radius: 4px;
-  background-color: #0a0a0a;
+  background-color: #77f7fe;
   color: white;
   margin:10px;
+  
 }
 
 .Mainlink{
@@ -151,6 +157,7 @@ body {
   margin-left: 200px; 
   margin-bottom: 100px;
   margin-top:85px;
+  background-color: rgb(93, 91, 91);
 }
 
 
@@ -159,6 +166,16 @@ footer {
   bottom: 0;
   width: 100%;
   height: 50px;   /* Height of the footer */
-  background: #ffffff;
+  background-color: rgb(165, 164, 164);
   text-align: center;
 }
+
+img {
+  padding: 5px;
+}
+
+.a1 {
+  padding: 5px;
+}
+
+

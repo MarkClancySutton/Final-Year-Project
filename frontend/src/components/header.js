@@ -13,9 +13,17 @@ function Header() {
         
           <Nav className="headlink" fixed="top">
           <Nav.Link href="/"> Logout</Nav.Link>
-          <Nav.Link href="/Routine"> Routines</Nav.Link>
+          
+          
            
           </Nav>
+          <Nav className="headlink" fixed="top">
+          <Nav.Link href="/Routine"> Routines</Nav.Link>
+          
+          
+           
+          </Nav>
+          
       </Navbar>
   );
 }

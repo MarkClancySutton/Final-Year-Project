@@ -7,7 +7,9 @@ import UserList from "./pages/UserList";
 import AddUser from "./pages/AddUser";
 import Register from './pages/Register';
 import EditUser from './pages/EditUser';
+import Routine_timed from './pages/Routine_timed';
 import Routine from './pages/Routine';
+import Routine_daily from './pages/Routine_daily';
 
 
 export default function App() {
@@ -23,7 +25,10 @@ export default function App() {
           <Route path="UserList" element={<UserList />} />
           <Route path="UserList/add" element={<AddUser />} />
           <Route path="UserList/edit/:id" element={<EditUser />} />
-          <Route path="Routine" element={<Routine />} />
+          <Route path="Routine_timed" element={<Routine_timed />} />
+          <Route path="Routine_daily" element={<Routine_daily />} />
+          <Route path="Routine" element={<Routine/>} />
+          
         </Route>
       </Routes>
       

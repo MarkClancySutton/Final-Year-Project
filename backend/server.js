@@ -2,7 +2,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import UserRoute from "./routes/UserRoute.js";
+import UserRoute from "./routes/userRoute.js";
+import RoutineRoute from "./routes/routineRoute.js";
 
 
 
@@ -22,7 +23,7 @@ db.once('open', () => console.log('Database Connected...'));
 app.use(cors());
 app.use(express.json());
 app.use(UserRoute);
-
+app.use(RoutineRoute);
 
 //set the server to port 5000 
 app.listen(5000, ()=> console.log('Server up and running...'));

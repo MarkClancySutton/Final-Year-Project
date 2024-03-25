@@ -88,9 +88,7 @@ function Login() {
         <Link to="/Register" className="newbtn">
           Register
         </Link>
-        <Link to="/Addroutine" className="newbtn">
-          Register
-        </Link>
+        
         {error && <p>Error: {error}</p>}
        </div>
        

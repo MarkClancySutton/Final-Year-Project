@@ -138,7 +138,7 @@ const Routine_daily = () => {
         <Header />
         <div className="Home">
 
-            <h2>24-Hour Clock Trigger</h2>
+            <h2>Set the time and Day of device action</h2>
             <p>Set the trigger time:</p>
             <label htmlFor="hours">Hours:</label>
             <input type="number" id="hours" min="0" max="23" value={hours} onChange={handleHoursChange} />

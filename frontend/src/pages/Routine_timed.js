@@ -133,7 +133,7 @@ const Routine_timed = () => {
         <div>
             
 
-            <h2>24-Hour Clock Trigger</h2>
+            <h2>24-Hour Clock Trigger for devices </h2>
             <p>Set the trigger time:</p>
             <label htmlFor="hours">Hours:</label>
             <input type="number" id="hours" min="0" max="23" value={hours} onChange={handleHoursChange} />

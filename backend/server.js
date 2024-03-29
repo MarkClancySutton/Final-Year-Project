@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import UserRoute from "./routes/userRoute.js";
 import RoutineRoute from "./routes/routineRoute.js";
-
+import Routine_dayRoute from "./routes/routine_dayRoute.js";
 
 
 const app = express();
@@ -24,6 +24,7 @@ app.use(cors());
 app.use(express.json());
 app.use(UserRoute);
 app.use(RoutineRoute);
+app.use(Routine_dayRoute);
 
 //set the server to port 5000 
 app.listen(5000, ()=> console.log('Server up and running...'));

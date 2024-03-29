@@ -7,6 +7,7 @@ const Routine_daily = () => {
     const [selectedComponent, setSelectedComponent] = useState("led"); // Default selected component is LED
     const [hours, setHours] = useState("12");
     const [minutes, setMinutes] = useState("00");
+    const [day, setDay] = useState("Monday"); // Default day is Monday
     const [routines, setRoutines] = useState([]);
 
     useEffect(() => {
@@ -24,34 +25,19 @@ const Routine_daily = () => {
     
 
     useEffect(() => {
-        // Update routines whenever selectedComponent, hours, or minutes change
+        // Update routines whenever selectedComponent, hours, minutes, or day change
         fetchRoutinesFromDatabase();
-    }, [selectedComponent, hours, minutes]);
+    }, [selectedComponent, hours, minutes, day]);
 
     // Function to fetch routines from the database
     const fetchRoutinesFromDatabase = () => {
-        axios.get("http://localhost:5000/routines")
+        axios.get("http://localhost:5000/routines_day")
             .then(response => {
-                console.log("Raw response data:", response.data); // Log the raw response data
-                
                 const parsedRoutines = response.data.map(routine => {
-                    // Parse the time from each routine and return the parsed routine
-                    const { _id, device, action, time, __v } = routine;
+                    const { _id, device, action, time, day, __v } = routine;
                     const [hours, minutes] = time.split(':').map(num => parseInt(num, 10));
-                    return { _id, device, action, hours, minutes, __v };
+                    return { _id, device, action, day, hours, minutes, __v };
                 });
-
-                console.log("Parsed routines:", parsedRoutines); // Log the parsed routines
-                
-                // Print current time (hour and minute separately)
-                const currentTime = new Date();
-                console.log("Current time:", currentTime.getHours(), ":", currentTime.getMinutes());
-
-                // Print last time in the parsed dataset
-                if (parsedRoutines.length > 0) {
-                    const lastRoutine = parsedRoutines[parsedRoutines.length - 1];
-                    console.log("Last time in parsed dataset:", lastRoutine.hours, ":", lastRoutine.minutes);
-                }
 
                 // Update the routines state with the parsed routines
                 setRoutines(parsedRoutines);
@@ -64,24 +50,30 @@ const Routine_daily = () => {
             });
     };
 
-
-
     // Function to check if current time matches any routine and send HTTP request
     const checkRoutines = () => {
         const currentTime = new Date();
         const currentHour = currentTime.getHours();
         const currentMinute = currentTime.getMinutes();
+        const currentDay = currentTime.toLocaleString('en-us', { weekday: 'long' }); // Get current day of the week as a string
 
         routines.forEach(routine => {
-            const { hours, minutes, device, action } = routine;
-            if (currentHour === hours && currentMinute === minutes && device === selectedComponent) {
-                console.log(`Matching routine found for ${hours}:${minutes}`);
-                // Here you can add any additional actions you want to take when a match is found
-                // Send HTTP request for both 'on' and 'off' actions
-                sendHttpRequest(device, action);
+            const { day, hours, minutes, device, action } = routine;
+            const routineDay = day.toLowerCase(); // Convert day from the routine to lowercase
+            const currentRoutineDay = currentDay.toLowerCase(); // Convert current day to lowercase
+            if (parseInt(hours) === currentHour && parseInt(minutes) === currentMinute && device === selectedComponent) {
+                if (routineDay === currentRoutineDay) {
+                    console.log(`Matching routine found for ${day} ${hours}:${minutes}`);
+                    // Here you can add any additional actions you want to take when a match is found
+                    // Send HTTP request for both 'on' and 'off' actions
+                    sendHttpRequest(device, action);
+                } else {
+                    console.log(`Time matches but day does not for ${day} ${hours}:${minutes}`);
+                }
             }
         });
     };
+
 
     // Function to send HTTP request
     const sendHttpRequest = (device, action) => {
@@ -94,23 +86,25 @@ const Routine_daily = () => {
             });
     };
 
-
     // Function to send routine data
-    const sendRoutineData = (device, action) => {
-        axios.post("http://localhost:5000/routines", {
-            device,
-            action,
-            time: `${hours}:${minutes}`
+    const sendRoutineData = (action) => {
+        axios.post("http://localhost:5000/routines_day", {
+            device: selectedComponent,
+            action: action,
+            time: `${hours}:${minutes}`,
+            day: day
         })
         .then(response => {
             console.log("Routine data sent successfully:", response.data);
+            // Fetch updated routines after adding a new routine
+            fetchRoutinesFromDatabase();
         })
         .catch(error => {
             console.error("Error sending routine data:", error);
         });
     };
 
-    // Event handlers for component, hours, and minutes change
+    // Event handlers for component, hours, minutes, and day change
     const handleComponentChange = (event) => {
         setSelectedComponent(event.target.value);
     };
@@ -123,18 +117,26 @@ const Routine_daily = () => {
         setMinutes(event.target.value);
     };
 
-    // Event handlers for turning on and off
-    const handleTurnOn = () => {
-        sendRoutineData(selectedComponent, 'on');
+    const handleDayChange = (event) => {
+        setDay(event.target.value);
     };
 
+    // Event handlers for turning on and off
+    const handleTurnOn = () => {
+        sendRoutineData('on');
+    };
+
+    // Event handlers for turning off
     const handleTurnOff = () => {
-        sendRoutineData(selectedComponent, 'off');
+        sendRoutineData('off');
     };
 
     return (
         <div>
-            <Header />
+        <div className="columns mt-5">
+        <div className="column is-half">
+        <Header />
+        <div className="Home">
 
             <h2>24-Hour Clock Trigger</h2>
             <p>Set the trigger time:</p>
@@ -151,11 +153,29 @@ const Routine_daily = () => {
                 <option value="door">Door</option>
                 <option value="fan">Fan</option>
             </select>
+
+            <br/>
+            <label htmlFor="daySelect">Select Day:</label>
+            
+            <select id="daySelect" onChange={handleDayChange}>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+            </select>
+
             <br />
             <button onClick={handleTurnOn}>Turn On</button>
             <button onClick={handleTurnOff}>Turn Off</button>
 
-            <Footer />
+            
+        </div>
+        </div>
+        <Footer />
+        </div>
         </div>
     );
 };

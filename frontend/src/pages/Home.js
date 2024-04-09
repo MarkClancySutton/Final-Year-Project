@@ -16,7 +16,7 @@ const Home = () => {
   }
 
   function light_on() {
-    fetch("http://192.168.189.135:80/led/on", {
+    fetch("http://192.168.119.135:80/led/on", {
       method: "GET", // You can change the method as needed (GET, POST, etc.)
       headers: {
         // You can add headers if necessary
@@ -33,7 +33,7 @@ const Home = () => {
   }
 
   function light_off() {
-    fetch("http://192.168.189.135:80/led/off", {
+    fetch("http://192.168.119.135:80/led/off", {
       method: "GET", // You can change the method as needed (GET, POST, etc.)
       headers: {
         // You can add headers if necessary
@@ -49,7 +49,7 @@ const Home = () => {
       });
   }
   function fan_on() {
-    fetch("http://192.168.189.135:80/fan/on", {
+    fetch("http://192.168.119.135:80/fan/on", {
       method: "GET", // You can change the method as needed (GET, POST, etc.)
       headers: {
         // You can add headers if necessary
@@ -65,7 +65,7 @@ const Home = () => {
       });
   }
   function fan_off() {
-    fetch("http://192.168.189.135:80/fan/off", {
+    fetch("http://192.168.119.135:80/fan/off", {
       method: "GET", // You can change the method as needed (GET, POST, etc.)
       headers: {
         // You can add headers if necessary
@@ -81,7 +81,7 @@ const Home = () => {
       });
   }
   function door_open() {
-    fetch("http://192.168.189.135:80/door/on", {
+    fetch("http://192.168.119.135:80/door/on", {
       method: "GET", // You can change the method as needed (GET, POST, etc.)
       headers: {
         // You can add headers if necessary
@@ -97,7 +97,7 @@ const Home = () => {
       });
   }
   function door_closed() {
-    fetch("http://192.168.189.135:80/door/off", {
+    fetch("http://192.168.119.135:80/door/off", {
       method: "GET", // You can change the method as needed (GET, POST, etc.)
       headers: {
         // You can add headers if necessary

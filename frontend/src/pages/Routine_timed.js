@@ -78,7 +78,7 @@ const Routine_timed = () => {
 
     // Function to send HTTP request
     const sendHttpRequest = (device, action) => {
-        axios.get(`http://192.168.189.135:80/${device}/${action}`)
+        axios.get(`http://192.168.119.135:80/${device}/${action}`)
             .then(response => {
                 console.log("HTTP request sent successfully:", response.data);
             })

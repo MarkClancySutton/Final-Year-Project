@@ -77,7 +77,7 @@ const Routine_daily = () => {
 
     // Function to send HTTP request
     const sendHttpRequest = (device, action) => {
-        axios.get(`http://192.168.189.135:80/${device}/${action}`)
+        axios.get(`http://192.168.119.135:80/${device}/${action}`)
             .then(response => {
                 console.log("HTTP request sent successfully:", response.data);
             })
@@ -138,7 +138,8 @@ const Routine_daily = () => {
         <Header />
         <div className="Home">
 
-            <h2>Set the time and Day of device action</h2>
+            <h2>Set the time and Day of device action
+            </h2>
             <p>Set the trigger time:</p>
             <label htmlFor="hours">Hours:</label>
             <input type="number" id="hours" min="0" max="23" value={hours} onChange={handleHoursChange} />
